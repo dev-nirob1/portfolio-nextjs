@@ -4,12 +4,39 @@
   --background: #ffffff;
   --foreground: #171717;
 }
+@custom-variant dark (&:where(.dark, .dark *));
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
+}
+@theme {
+  --color-primary: #b5766a;
+  --color-primary-variant: #8a4f45;
+  --color-secondary: #5f6e42;
+  --color-secondary-variant: #46512f;
+  --color-background: #f1eee7;
+  --color-surface: #e8e3d6;
+  --color-ink: #17181c;
+  --color-slate: #726f63;
+  --color-line: #d9d5c8;
+  --font-display: var(--font-fraunces), serif;
+  --font-sans: var(--font-plex-sans), sans-serif;
+  --font-mono: var(--font-plex-mono), monospace;
+}
+
+.dark {
+  --color-primary: #D68F7F;
+  --color-primary-variant: #B5766A;
+  --color-secondary: #8AA06A;
+  --color-secondary-variant: #5F6E42;
+  --color-background: #17181C;
+  --color-surface: #202126;
+  --color-ink: #F1EEE7;
+  --color-slate: #9C9890;
+  --color-line: #34353B;
 }
 
 @media (prefers-color-scheme: dark) {
