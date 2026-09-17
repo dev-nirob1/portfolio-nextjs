@@ -1,5 +1,4 @@
 import Link from "next/link";
-import WindowPanel from "../ui/WindowPanel";
 import Image from "next/image";
 
 const Hero = () => {
