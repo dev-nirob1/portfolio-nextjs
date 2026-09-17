@@ -1,5 +1,6 @@
 import { Fraunces, IBM_Plex_Sans, IBM_Plex_Mono } from "next/font/google";
 import "./globals.css";
+import Navbar from "./components/layout/Navbar";
 
 const fraunces = Fraunces({
   variable: "--font-fraunces",
@@ -30,7 +31,10 @@ const RootLayout = ({ children }) => {
       lang="en"
       className={`${fraunces.variable} ${plexSans.variable} ${plexMono.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col font-sans">{children}</body>
+      <body className="min-h-full flex flex-col font-sans">
+        <Navbar/>
+        {children}
+        </body>
     </html>
   );
 };
