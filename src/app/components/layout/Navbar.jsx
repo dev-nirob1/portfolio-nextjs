@@ -6,7 +6,7 @@ import { FiMenu, FiX } from "react-icons/fi";
 import Container from "../ui/Container";
 
 const navLinks = [
-  { label: "Home", href: "#home" },
+  { label: "Home", href: "/" },
   { label: "About", href: "#about" },
   { label: "Work", href: "#work" },
   { label: "Contact", href: "#contact" },
@@ -19,7 +19,7 @@ const Navbar = () => {
     <header className="sticky top-0 z-20 border-b border-line bg-background/90 backdrop-blur-sm">
       <Container className="flex items-center justify-between py-6">
         <Link href="#home" className="font-display text-lg tracking-tight text-ink">
-          Nirob
+          <h1 className="text-3xl font-bold">Me.N!R@b</h1>
         </Link>
 
         <nav className="hidden md:flex items-center gap-8 font-mono text-[13px] text-slate">

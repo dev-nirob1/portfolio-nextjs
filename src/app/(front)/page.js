@@ -4,6 +4,7 @@ import Hero from "../components/section/Hero";
 import StackPanel from "../components/section/StackPanel";
 import AllWork from "../components/section/AllWork";
 import Contact from "../components/section/Contact";
+import Services from "../components/section/Services";
 
 export default function Home() {
   return (
@@ -12,8 +13,9 @@ export default function Home() {
       <FeaturedWork />
       <StackPanel />
       <About />
+      <Services />
       <AllWork />
-      <Contact/>
+      <Contact />
     </>
   );
 }
