@@ -1,32 +1,25 @@
 import Link from "next/link";
 import Image from "next/image";
+import Container from "../ui/Container";
 
 const Hero = () => {
   return (
-    <section id="home" className="px-6 md:px-14 pt-16 pb-16 md:pt-16 md:pb-20">
-      <div className="grid md:grid-cols-2 gap-10 md:gap-14 items-center">
+    <section className="pt-16 pb-16 md:pt-16 md:pb-20">
+      <Container>
+        <div className="grid md:grid-cols-2 gap-10 md:gap-14 items-center">
         <div className="">
           <div className="inline-flex items-center gap-2 font-mono text-xs text-slate mb-6">
             <span className="w-1.5 h-1.5 rounded-full bg-primary" />
-            available for full-time roles
+            available for full-time opportunities
           </div>
 
-          <p className="font-mono text-[13px] mb-6 text-slate">
-            Frontend developer · React / Next.js / Tailwind
-          </p>
-
           <h1 className="font-display text-[2.6rem] leading-[1.08] sm:text-[3.4rem] md:text-[3.8rem] tracking-tight text-ink">
-            I build interfaces
-            <br />
-            that hold up under
-            <br />
-            real use.
+            I build clean, <br></br> practical interfaces for the web.
           </h1>
 
           <p className="mt-7 max-w-md text-[16px] leading-relaxed text-slate">
-            Three years turning designs and half-finished ideas into shipped
-            products — dashboards, storefronts, and the small interactions that
-            make software feel considered rather than assembled.
+          I like turning rough ideas into polished interfaces, keeping things practical, reusable, and easy to maintain. I’m always learning, experimenting, and looking for better ways to build.
+
           </p>
 
           <div className="mt-9 flex items-center gap-4">
@@ -55,6 +48,7 @@ const Hero = () => {
           />
         </div>
       </div>
+      </Container>
     </section>
   );
 };

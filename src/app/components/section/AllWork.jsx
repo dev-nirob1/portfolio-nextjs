@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import Container from "../ui/Container";
 
 const projects = [
   {
@@ -64,8 +65,9 @@ const AllWork = () => {
       : projects.filter((project) => project.category === activeFilter);
 
   return (
-    <section id="work" className="px-6 md:px-14 py-16 border-t border-line">
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-10">
+    <section id="work" className="py-16 border-t border-line">
+      <Container className="max-w-3xl!">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-10">
         <p className="font-mono text-[13px] text-slate italic">
           // all work
         </p>
@@ -125,6 +127,7 @@ const AllWork = () => {
 </Link>
         ))}
       </div>
+      </Container>
     </section>
   );
 };

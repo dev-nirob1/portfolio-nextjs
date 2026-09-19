@@ -1,6 +1,6 @@
 export const projects = [
   {
-    slug: "boxdrop",
+    slug: "box-drop",
     title: "BoxDrop — courier tracking platform",
     description:
       "Full-stack resume project: role-based dashboards, live parcel status timeline, and admin tooling built on a raw MongoDB + Express backend.",

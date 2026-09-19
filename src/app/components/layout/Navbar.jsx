@@ -3,6 +3,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import { FiMenu, FiX } from "react-icons/fi";
+import Container from "../ui/Container";
 
 const navLinks = [
   { label: "Home", href: "#home" },
@@ -16,7 +17,7 @@ const Navbar = () => {
 
   return (
     <header className="sticky top-0 z-20 border-b border-line bg-background/90 backdrop-blur-sm">
-      <div className="flex items-center justify-between px-6 md:px-14 py-6">
+      <Container className="flex items-center justify-between py-6">
         <Link href="#home" className="font-display text-lg tracking-tight text-ink">
           Nirob
         </Link>
@@ -43,7 +44,7 @@ const Navbar = () => {
         >
           {isOpen ? <FiX /> : <FiMenu />}
         </button>
-      </div>
+      </Container>
 
       {isOpen && (
         <nav className="md:hidden flex flex-col border-t border-line px-6 py-4 gap-4 font-mono text-[13px] text-slate bg-background">

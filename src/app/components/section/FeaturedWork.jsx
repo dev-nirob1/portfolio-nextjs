@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Container from "../ui/Container";
 
 const featured = [
   {
@@ -23,7 +24,8 @@ const featured = [
 
 const FeaturedWork = () => {
   return (
-    <section className="px-6 md:px-14 py-16 border-t border-line">
+    <section className="py-16 border-t border-line">
+      <Container>
       <p className="font-mono text-[13px] text-slate italic mb-8">
         // featured work
       </p>
@@ -55,6 +57,7 @@ const FeaturedWork = () => {
           </Link>
         ))}
       </div>
+      </Container>
     </section>
   );
 };
