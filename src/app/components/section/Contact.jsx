@@ -46,10 +46,12 @@ const Contact = () => {
 
       if (!res.ok) throw new Error("Failed to send");
 
-      setStatus("sent");
+      alert("Message sent!");
       setFormData({ name: "", email: "", message: "" });
     } catch (error) {
-      setStatus("error");
+      alert("Something went wrong. Please try again.");
+    } finally {
+      setStatus("idle");
     }
   };
 
@@ -140,13 +142,7 @@ const Contact = () => {
                 disabled={status === "sending"}
                 className="cursor-pointer font-mono text-[13px] px-6 py-3 rounded-sm bg-ink text-background hover:bg-primary transition-colors disabled:opacity-60"
               >
-                {status === "sending"
-                  ? "sending..."
-                  : status === "sent"
-                    ? "sent ✓"
-                    : status === "error"
-                      ? "failed, try again"
-                      : "Send Message"}
+                {status === "sending" ? "sending..." : "Send Message"}
               </button>
             </form>
           </div>
