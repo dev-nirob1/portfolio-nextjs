@@ -68,13 +68,13 @@ const FeaturedWork = () => {
           ))}
         </div>
         <div className="text-center mt-10">
-  <Link
-    href="/#work"
-    className="inline-block font-mono text-[13px] px-6 py-3 rounded-sm border border-line text-ink hover:border-ink hover:bg-surface transition-colors"
-  >
-    view more work →
-  </Link>
-</div>
+          <Link
+            href="/#work"
+            className="inline-block font-mono text-[13px] px-6 py-3 rounded-sm border border-line text-ink hover:border-ink hover:bg-surface transition-colors"
+          >
+            view more work →
+          </Link>
+        </div>
       </Container>
     </section>
   );

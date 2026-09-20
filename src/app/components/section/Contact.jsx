@@ -2,7 +2,6 @@
 
 import { useState } from "react";
 import Container from "../ui/Container";
-import WindowPanel from "../ui/WindowPanel";
 
 const contactLinks = [
   {
@@ -38,11 +37,20 @@ const Contact = () => {
     e.preventDefault();
     setStatus("sending");
 
-    // TODO: replace with real API route once the backend exists
-    // await fetch("/api/contact", { method: "POST", body: JSON.stringify(formData) });
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData),
+      });
 
-    setStatus("sent");
-    setFormData({ name: "", email: "", message: "" });
+      if (!res.ok) throw new Error("Failed to send");
+
+      setStatus("sent");
+      setFormData({ name: "", email: "", message: "" });
+    } catch (error) {
+      setStatus("error");
+    }
   };
 
   return (
@@ -82,59 +90,65 @@ const Contact = () => {
 
           <div>
             <form onSubmit={handleSubmit} className="space-y-6 max-w-md">
-  <div>
-    <label className="font-mono text-[12px] text-slate italic block mb-2">
-      // your name
-    </label>
-    <input
-      type="text"
-      name="name"
-      required
-      value={formData.name}
-      onChange={handleChange}
-      placeholder="your name"
-      className="w-full bg-transparent border border-line rounded-sm px-3 py-2 text-[15px] text-ink focus:outline-none focus:border-primary transition-colors duration-300"
-    />
-  </div>
+              <div>
+                <label className="font-mono text-[12px] text-slate italic block mb-2">
+                  // your name
+                </label>
+                <input
+                  type="text"
+                  name="name"
+                  required
+                  value={formData.name}
+                  onChange={handleChange}
+                  placeholder="your name"
+                  className="w-full bg-transparent border border-line rounded-sm px-3 py-2 text-[15px] text-ink focus:outline-none focus:border-primary transition-colors duration-300"
+                />
+              </div>
 
-  <div>
-    <label className="font-mono text-[12px] text-slate italic block mb-2">
-      // your email
-    </label>
-    <input
-      type="email"
-      name="email"
-      required
-      value={formData.email}
-      onChange={handleChange}
-      placeholder="you@example.com"
-      className="w-full bg-transparent border border-line rounded-sm px-3 py-2 text-[15px] text-ink focus:outline-none focus:border-primary transition-colors duration-300"
-    />
-  </div>
+              <div>
+                <label className="font-mono text-[12px] text-slate italic block mb-2">
+                  // your email
+                </label>
+                <input
+                  type="email"
+                  name="email"
+                  required
+                  value={formData.email}
+                  onChange={handleChange}
+                  placeholder="you@example.com"
+                  className="w-full bg-transparent border border-line rounded-sm px-3 py-2 text-[15px] text-ink focus:outline-none focus:border-primary transition-colors duration-300"
+                />
+              </div>
 
-  <div>
-    <label className="font-mono text-[12px] text-slate italic block mb-2">
-      // your message
-    </label>
-    <textarea
-      name="message"
-      required
-      rows={4}
-      value={formData.message}
-      onChange={handleChange}
-      placeholder="tell me about the role or project..."
-      className="w-full bg-transparent border border-line rounded-sm px-3 py-2 text-[15px] text-ink focus:outline-none focus:border-primary transition-colors duration-300 resize-none"
-    />
-  </div>
+              <div>
+                <label className="font-mono text-[12px] text-slate italic block mb-2">
+                  // your message
+                </label>
+                <textarea
+                  name="message"
+                  required
+                  rows={4}
+                  value={formData.message}
+                  onChange={handleChange}
+                  placeholder="tell me about the role or project..."
+                  className="w-full bg-transparent border border-line rounded-sm px-3 py-2 text-[15px] text-ink focus:outline-none focus:border-primary transition-colors duration-300 resize-none"
+                />
+              </div>
 
-  <button
-    type="submit"
-    disabled={status === "sending"}
-    className="cursor-pointer font-mono text-[13px] px-6 py-3 rounded-sm bg-ink text-background hover:bg-primary transition-colors disabled:opacity-60"
-  >
-    {status === "sending" ? "sending..." : status === "sent" ? "sent ✓" : "Send Message"}
-  </button>
-</form>
+              <button
+                type="submit"
+                disabled={status === "sending"}
+                className="cursor-pointer font-mono text-[13px] px-6 py-3 rounded-sm bg-ink text-background hover:bg-primary transition-colors disabled:opacity-60"
+              >
+                {status === "sending"
+                  ? "sending..."
+                  : status === "sent"
+                    ? "sent ✓"
+                    : status === "error"
+                      ? "failed, try again"
+                      : "Send Message"}
+              </button>
+            </form>
           </div>
         </div>
       </Container>
