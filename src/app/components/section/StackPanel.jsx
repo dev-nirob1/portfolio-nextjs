@@ -1,4 +1,8 @@
 import Container from "../ui/Container";
+import Dot from "../ui/Dot";
+import Paragraph from "../ui/Paragraph";
+import SectionTitle from "../ui/SectionTitle";
+import Span from "../ui/Span";
 import WindowPanel from "../ui/WindowPanel";
 
 const stackGroups = [
@@ -22,7 +26,7 @@ const StackPanel = () => {
   return (
     <section id="stack" className="py-16 border-t border-line">
       <Container>
-        <p className="font-mono text-[13px] text-slate italic mb-8">// stack</p>
+        <SectionTitle>Tech Stack</SectionTitle>
 
         <WindowPanel label="stack.js">
           <div className="grid md:grid-cols-2 divide-y md:divide-y-0 md:divide-x divide-line">
@@ -32,26 +36,25 @@ const StackPanel = () => {
                 <span className="text-primary">const</span>{" "}
                 <span className="text-ink">stack</span> = {"{"}
               </div>
-
+              {/* stack i know  */}
               <div className="space-y-4 pl-4">
                 {stackGroups.map((group) => (
                   <div key={group.key}>
-                    <p className="text-slate mb-3">{group.key}: [</p>
+                    <Paragraph className="mb-3">{group.key}: [</Paragraph>
                     <div className="flex flex-wrap gap-2 pl-4">
                       {group.items.map((item) => (
-                        <span
+                        <Span
                           key={item}
                           className="px-2.5 py-1 border border-line bg-surface text-secondary"
                         >
-                          "{item}"
-                        </span>
+                           {`"${item}"`}
+                        </Span>
                       ))}
                     </div>
-                    <p className="text-slate mt-3">];</p>
+                    <Paragraph className="mt-3">];</Paragraph>
                   </div>
                 ))}
               </div>
-
               <div className="text-slate mt-6">{"}"}</div>
             </div>
 
@@ -59,28 +62,30 @@ const StackPanel = () => {
             <div className="p-6 divide-y divide-line">
               <div className="pb-5">
                 <div className="flex items-center justify-between mb-4">
-                  <p className="font-mono text-[11px] text-slate">
-                    comfortable
-                  </p>
-                  <span className="font-mono text-[10px] text-secondary">
-                    actively using
-                  </span>
+                
+                  <Span className="text-secondary">
+                    Comfortable
+                  </Span>
+                  <Span className="text-secondary">
+                    Actively using
+                  </Span>
                 </div>
-                <div className="space-y-5">
+
+                <div className="space-y-4">
                   {basic.map((item) => (
                     <div
                       key={item.name}
                       className="flex items-center justify-between"
                     >
                       <div className="flex items-center gap-2">
-                        <span className="w-1.5 h-1.5 rounded-full bg-secondary" />
-                        <span className="text-[14px] text-ink">
+                        <Dot className="bg-secondary" />
+                        <Span className="text-sm text-ink">
                           {item.name}
-                        </span>
+                        </Span>
                       </div>
-                      <span className="font-mono text-[11px] text-slate">
+                      <Span>
                         {item.role}
-                      </span>
+                      </Span>
                     </div>
                   ))}
                 </div>
@@ -88,26 +93,30 @@ const StackPanel = () => {
 
               <div className="pt-5">
                 <div className="flex items-center justify-between mb-4">
-                  <p className="font-mono text-[11px] text-slate">exploring</p>
-                  <span className="font-mono text-[10px] text-primary">
-                    currently learning
-                  </span>
+                  <Span className="text-slate">
+                    Exploring
+                  </Span>
+                  <Span className="text-primary">
+                    Currently Learning
+                  </Span>
                 </div>
-                <div className="space-y-5">
+
+                {/* exploring and learning stack  */}
+                <div className="space-y-4">
                   {exploring.map((item) => (
                     <div
                       key={item.name}
                       className="flex items-center justify-between"
                     >
                       <div className="flex items-center gap-2">
-                        <span className="w-1.5 h-1.5 rounded-full bg-primary" />
-                        <span className="text-[14px] text-ink">
+                        <Dot className="text-primary" />
+                        <Span className="text-sm text-ink">
                           {item.name}
-                        </span>
+                        </Span>
                       </div>
-                      <span className="font-mono text-[11px] text-slate">
+                      <Span className="text-slate">
                         {item.role}
-                      </span>
+                      </Span>
                     </div>
                   ))}
                 </div>
