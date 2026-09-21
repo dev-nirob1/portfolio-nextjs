@@ -4,6 +4,7 @@ import { useState } from "react";
 import Link from "next/link";
 import { FiMenu, FiX } from "react-icons/fi";
 import Container from "../ui/Container";
+import Image from "next/image";
 
 const navLinks = [
   { label: "Home", href: "/" },
@@ -17,9 +18,9 @@ const Navbar = () => {
 
   return (
     <header className="sticky top-0 z-20 border-b border-line bg-background/90 backdrop-blur-sm">
-      <Container className="flex items-center justify-between py-6">
+      <Container className="flex items-center justify-between">
         <Link href="#home" className="font-display text-lg tracking-tight text-ink">
-          <h1 className="text-3xl font-bold">Me.N!R@b</h1>
+          <Image src="/logo-light.png" alt="Logo" width={240} height={70} className="inline-block object-cover border" />
         </Link>
 
         <nav className="hidden md:flex items-center gap-8 font-mono text-[13px] text-slate">
