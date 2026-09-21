@@ -10,6 +10,7 @@ const Button = ({
   const variants = {
     primary: "bg-ink text-background hover:bg-primary",
     secondary: "border border-line text-ink hover:border-ink",
+    danger: "bg-red-50 text-red-600 hover:bg-red-700 hover:text-white",
   };
 
   return (
