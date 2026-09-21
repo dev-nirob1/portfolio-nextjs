@@ -1,12 +1,18 @@
-import { cn } from '@/app/utils/cn';
-import React from 'react';
+import React from "react";
+import { cn } from "@/app/utils/cn";
 
-const Label = ({children, className}) => {
-    return (
-        <div className={cn('', className)}>
-            {children}
-        </div>
-    );
+const Label = ({ children, className, ...props }) => {
+  return (
+    <label
+      className={cn(
+        "font-mono text-[12px] text-slate italic block mb-2",
+        className
+      )}
+      {...props}
+    >
+      {"//"} {children}
+    </label>
+  );
 };
 
 export default Label;
