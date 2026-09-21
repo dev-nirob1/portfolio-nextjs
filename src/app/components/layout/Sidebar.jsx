@@ -64,12 +64,12 @@ const Sidebar = ({ isOpen, onClose }) => {
                 href={item.href}
                 className={`relative flex items-center gap-3 px-3 py-2.5 rounded-sm text-sm transition-colors ${
                   isActive
-                    ? "bg-surface text-ink"
+                    ? "border border-line text-ink"
                     : "text-slate hover:bg-surface hover:text-ink"
                 }`}
               >
                 {isActive && (
-                  <span className="absolute left-0 top-1/2 -translate-y-1/2 w-[3px] h-5 bg-primary rounded-r-sm" />
+                  <span className="absolute left-0 top-1/2 -translate-y-1/2 w-0.75 h-5 bg-primary rounded-r-sm" />
                 )}
                 <Icon size={16} />
                 {item.label}
