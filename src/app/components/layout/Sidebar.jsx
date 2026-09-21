@@ -3,11 +3,12 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
-import { FiX, FiFolder, FiPlusCircle, FiLogOut } from "react-icons/fi";
-
+import { FiX, FiHome, FiFolder, FiPlusCircle, FiTag, FiLogOut } from "react-icons/fi";
 const navItems = [
-  { label: "Projects", href: "/dashboard", icon: FiFolder },
-  { label: "Add Project", href: "/dashboard/projects/new", icon: FiPlusCircle },
+  { label: "Overview", href: "/admin", icon: FiHome },
+  { label: "Projects", href: "/admin/projects", icon: FiFolder },
+  { label: "Add Project", href: "/admin/projects/new", icon: FiPlusCircle },
+  { label: "Categories", href: "/admin/categories", icon: FiTag },
 ];
 
 const Sidebar = ({ isOpen, onClose }) => {
