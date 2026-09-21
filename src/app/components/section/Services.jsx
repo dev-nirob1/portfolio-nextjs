@@ -1,4 +1,9 @@
 import Container from "../ui/Container";
+import SectionTitle from "../ui/SectionTitle";
+import Heading from "../ui/Heading";
+import Paragraph from "../ui/Paragraph";
+import Badge from "../ui/Badge";
+import Span from "../ui/Span";
 
 const services = [
   {
@@ -26,13 +31,12 @@ const services = [
     engagement: "one-off project",
   },
 ];
+
 const Services = () => {
   return (
     <section id="services" className="py-16 border-t border-line">
       <Container className="max-w-3xl!">
-        <p className="font-mono text-[13px] text-slate italic mb-8">
-          // services
-        </p>
+        <SectionTitle>Services</SectionTitle>
 
         <div className="divide-y divide-line">
           {services.map((service) => (
@@ -41,32 +45,28 @@ const Services = () => {
               className="flex flex-col md:flex-row md:items-center justify-between gap-4 py-6 first:pt-0 last:pb-0"
             >
               <div className="flex gap-6">
-                <span className="font-mono text-[12px] text-slate shrink-0">
+                <Span className="text-slate shrink-0">
                   {service.number}
-                </span>
+                </Span>
+
                 <div>
-                  <p className="font-display text-[1.2rem] text-ink">
-                    {service.title}
-                  </p>
-                  <p className="text-[14px] leading-relaxed text-slate mt-1 max-w-md">
+                  <Heading as="h5">{service.title}</Heading>
+
+                  <Paragraph className="text-[14px] mt-1 max-w-md">
                     {service.description}
-                  </p>
-                  <div className="flex gap-2 mt-3">
+                  </Paragraph>
+
+                  <div className="flex flex-wrap gap-2 mt-3">
                     {service.tags.map((tag) => (
-                      <span
-                        key={tag}
-                        className="font-mono text-[11px] text-primary bg-line/40 px-2 py-1 rounded-sm"
-                      >
-                        {tag}
-                      </span>
+                      <Badge key={tag}>{tag}</Badge>
                     ))}
                   </div>
                 </div>
               </div>
 
-              <span className="font-mono text-[11px] text-slate whitespace-nowrap md:pl-6">
+              <Span className="text-slate whitespace-nowrap md:pl-6">
                 {service.engagement}
-              </span>
+              </Span>
             </div>
           ))}
         </div>

@@ -69,8 +69,9 @@ const AllWork = () => {
   return (
     <section id="work" className="py-16 border-t border-line">
       <Container className="max-w-3xl!">
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-8 border border-red-500">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-8">
           <SectionTitle className="mb-0">All Work</SectionTitle>
+          {/* filter button  */}
           <div className="flex gap-2">
             {filters.map((filter) => (
               <button
@@ -87,7 +88,7 @@ const AllWork = () => {
             ))}
           </div>
         </div>
-
+            {/* all work card  */}
         <div className="space-y-0">
           {filtered.map((project) => (
             <WorkListCard project={project} key={project.slug} />
