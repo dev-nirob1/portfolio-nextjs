@@ -45,7 +45,8 @@ const Sidebar = ({ isOpen, onClose }) => {
               alt="AHN"
               width={200}
               height={60}
-              className="w-auto h-15"
+              loading="eager"
+              className="w-auto h-auto"
             />
           </Link>
 
