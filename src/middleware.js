@@ -1,16 +1,16 @@
-import { NextResponse } from "next/server";
-import { verifyToken } from "@/lib/auth";
+// import { NextResponse } from "next/server";
+// import { verifyToken } from "@/lib/auth";
 
-export function middleware(request) {
-  const user = verifyToken(request);
+// export function middleware(request) {
+//   const user = verifyToken(request);
 
-  if (!user || user.role !== "admin") {
-    return NextResponse.redirect(new URL("/login", request.url));
-  }
+//   if (!user || user.role !== "admin") {
+//     return NextResponse.redirect(new URL("/login", request.url));
+//   }
 
-  return NextResponse.next();
-}
+//   return NextResponse.next();
+// }
 
-export const config = {
-  matcher: "/kaku/:path*",
-};
+// export const config = {
+//   matcher: "/kaku/:path*",
+// };

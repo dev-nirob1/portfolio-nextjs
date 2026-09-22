@@ -1,125 +1,216 @@
+"use client";
+
+import { useState } from "react";
 import Link from "next/link";
 import { FiUploadCloud } from "react-icons/fi";
 
+import Heading from "@/app/components/ui/Heading";
+import Label from "@/app/components/ui/Label";
+import Input from "@/app/components/ui/Input";
+import Textarea from "@/app/components/ui/Textarea";
+import Button from "@/app/components/ui/Button";
+import Span from "@/app/components/ui/Span";
+import Paragraph from "@/app/components/ui/Paragraph";
+
 const NewProjectPage = () => {
+  const [formData, setFormData] = useState({
+    title: "",
+    slug: "",
+    tags: "",
+    shortDescription: "",
+    overview: "",
+    problem: "",
+    approach: "",
+    status: "draft",
+    category: "",
+    featured: false,
+    image: null,
+  });
+
+  const handleChange = (e) => {
+    const { name, value, type, checked, files } = e.target;
+
+    setFormData((prev) => ({
+      ...prev,
+      [name]:
+        type === "checkbox"
+          ? checked
+          : type === "file"
+            ? files[0]
+            : value,
+    }));
+  };
+
+const handleSubmit = (e) => {
+  e.preventDefault();
+
+  console.log("submitted");
+  console.log(formData);
+}
+
   return (
     <div>
-      <h1 className="font-display text-[1.6rem] text-ink mb-8">Add Project</h1>
+      <Heading as="h3" className="mb-8">
+        Add Project
+      </Heading>
 
-      <form className="grid lg:grid-cols-3 gap-8">
-        {/* LEFT — main fields */}
-        <div className="lg:col-span-2 space-y-5">
+      <form
+        onSubmit={handleSubmit}
+        className="grid lg:grid-cols-3 gap-8"
+      >
+        {/* Main Content */}
+        <div className="lg:col-span-2 space-y-6">
+          {/* Project Image */}
           <div>
-            <label className="text-sm font-medium text-ink block mb-1.5">
-              Project image
-            </label>
+            <Label htmlFor="image">project image</Label>
+
             <label
               htmlFor="image"
-              className="flex items-center gap-3 border border-line rounded-sm bg-surface px-4 py-3 cursor-pointer hover:border-ink transition-colors w-fit"
+              className="border border-dashed border-line rounded-sm h-48 flex flex-col items-center justify-center text-slate hover:border-primary hover:text-primary transition-colors cursor-pointer"
             >
-              <FiUploadCloud className="text-slate" size={18} />
-              <span className="text-[13px] text-slate">Upload image</span>
-              <input type="file" id="image" name="image" accept="image/*" className="hidden" />
+              <FiUploadCloud size={28} />
+
+              <Span className="mt-3">
+                {formData.image
+                  ? formData.image.name
+                  : "click to upload image"}
+              </Span>
+
+              {!formData.image && (
+                <Span className="text-[10px] text-slate/60 mt-1">
+                  PNG, JPG or WEBP
+                </Span>
+              )}
             </label>
+
+            <Input
+              id="image"
+              type="file"
+              name="image"
+              accept="image/png,image/jpeg,image/webp"
+              onChange={handleChange}
+              className="hidden"
+            />
           </div>
 
+          {/* Title */}
           <div>
-            <label className="text-sm font-medium text-ink block mb-1.5">
-              Title
-            </label>
-            <input
+            <Label htmlFor="title">project title</Label>
+
+            <Input
+              id="title"
               type="text"
               name="title"
-              placeholder="e.g. BoxDrop — Courier Tracking Platform"
-              className="w-full bg-surface border border-line rounded-sm px-3 py-2.5 text-[14px] text-ink placeholder:text-slate/60 focus:outline-none focus:border-primary transition-colors"
+              value={formData.title}
+              onChange={handleChange}
+              placeholder="e.g. BoxDrop"
             />
           </div>
 
+          {/* Slug */}
           <div>
-            <label className="text-sm font-medium text-ink block mb-1.5">
-              Slug
-            </label>
-            <input
+            <Label htmlFor="slug">slug</Label>
+
+            <Input
+              id="slug"
               type="text"
               name="slug"
-              placeholder="boxdrop"
-              className="w-full bg-surface border border-line rounded-sm px-3 py-2.5 text-[14px] text-ink placeholder:text-slate/60 focus:outline-none focus:border-primary transition-colors"
+              value={formData.slug}
+              onChange={handleChange}
+              placeholder="e.g. boxdrop"
             />
           </div>
 
+          {/* Tags */}
           <div>
-            <label className="text-sm font-medium text-ink block mb-1.5">
-              Tags
-            </label>
-            <input
+            <Label htmlFor="tags">tags</Label>
+
+            <Input
+              id="tags"
               type="text"
               name="tags"
-              placeholder="React, Next.js, Tailwind"
-              className="w-full bg-surface border border-line rounded-sm px-3 py-2.5 text-[14px] text-ink placeholder:text-slate/60 focus:outline-none focus:border-primary transition-colors"
+              value={formData.tags}
+              onChange={handleChange}
+              placeholder="React, Next.js, MongoDB"
+            />
+
+            <Paragraph className="text-[11px] text-slate/60 mt-2">
+              Separate tags with commas
+            </Paragraph>
+          </div>
+
+          {/* Short Description */}
+          <div>
+            <Label htmlFor="shortDescription">
+              short description
+            </Label>
+
+            <Textarea
+              id="shortDescription"
+              name="shortDescription"
+              rows={3}
+              value={formData.shortDescription}
+              onChange={handleChange}
+              placeholder="A short description of the project..."
             />
           </div>
 
+          {/* Overview */}
           <div>
-            <label className="text-sm font-medium text-ink block mb-1.5">
-              Short description
-            </label>
-            <textarea
-              name="description"
-              rows={2}
-              placeholder="One-line summary shown in project cards"
-              className="w-full bg-surface border border-line rounded-sm px-3 py-2.5 text-[14px] text-ink placeholder:text-slate/60 focus:outline-none focus:border-primary transition-colors resize-none"
-            />
-          </div>
+            <Label htmlFor="overview">overview</Label>
 
-          <div>
-            <label className="text-sm font-medium text-ink block mb-1.5">
-              Overview
-            </label>
-            <textarea
+            <Textarea
+              id="overview"
               name="overview"
-              rows={3}
-              placeholder="What is this project and who is it for?"
-              className="w-full bg-surface border border-line rounded-sm px-3 py-2.5 text-[14px] text-ink placeholder:text-slate/60 focus:outline-none focus:border-primary transition-colors resize-none"
+              rows={5}
+              value={formData.overview}
+              onChange={handleChange}
+              placeholder="Describe the project and what it does..."
             />
           </div>
 
+          {/* Problem */}
           <div>
-            <label className="text-sm font-medium text-ink block mb-1.5">
-              Problem
-            </label>
-            <textarea
+            <Label htmlFor="problem">problem</Label>
+
+            <Textarea
+              id="problem"
               name="problem"
-              rows={3}
-              placeholder="What problem were you solving?"
-              className="w-full bg-surface border border-line rounded-sm px-3 py-2.5 text-[14px] text-ink placeholder:text-slate/60 focus:outline-none focus:border-primary transition-colors resize-none"
+              rows={5}
+              value={formData.problem}
+              onChange={handleChange}
+              placeholder="What problem does this project solve?"
             />
           </div>
 
+          {/* Approach */}
           <div>
-            <label className="text-sm font-medium text-ink block mb-1.5">
-              Approach
-            </label>
-            <textarea
+            <Label htmlFor="approach">approach</Label>
+
+            <Textarea
+              id="approach"
               name="approach"
-              rows={3}
-              placeholder="What decisions did you make and why?"
-              className="w-full bg-surface border border-line rounded-sm px-3 py-2.5 text-[14px] text-ink placeholder:text-slate/60 focus:outline-none focus:border-primary transition-colors resize-none"
+              rows={5}
+              value={formData.approach}
+              onChange={handleChange}
+              placeholder="How did you approach the solution?"
             />
           </div>
         </div>
 
-        {/* RIGHT — publishing sidebar */}
+        {/* Sidebar */}
         <div className="lg:col-span-1">
-          <div className="border border-line rounded-sm p-5 sticky top-6">
-            <p className="text-sm font-medium text-ink mb-5">Publishing</p>
+          <div className="border border-line rounded-sm p-5 space-y-6 lg:sticky lg:top-6">
+            {/* Status */}
+            <div>
+              <Label htmlFor="status">status</Label>
 
-            <div className="mb-5">
-              <label className="text-[13px] text-slate block mb-1.5">
-                Status
-              </label>
               <select
+                id="status"
                 name="status"
-                className="w-full bg-surface border border-line rounded-sm px-3 py-2 text-[14px] text-ink focus:outline-none focus:border-primary transition-colors"
+                value={formData.status}
+                onChange={handleChange}
+                className="w-full bg-transparent border border-line rounded-sm px-3 py-2.5 text-[14px] text-ink focus:outline-none focus:border-primary transition-colors cursor-pointer"
               >
                 <option value="draft">Draft</option>
                 <option value="published">Published</option>
@@ -127,42 +218,57 @@ const NewProjectPage = () => {
               </select>
             </div>
 
+            {/* Category */}
             <div>
-              <label className="text-[13px] text-slate block mb-1.5">
-                Category
-              </label>
+              <Label htmlFor="category">category</Label>
+
               <select
+                id="category"
                 name="category"
-                className="w-full bg-surface border border-line rounded-sm px-3 py-2 text-[14px] text-ink focus:outline-none focus:border-primary transition-colors"
+                value={formData.category}
+                onChange={handleChange}
+                className="w-full bg-transparent border border-line rounded-sm px-3 py-2.5 text-[14px] text-ink focus:outline-none focus:border-primary transition-colors cursor-pointer"
               >
-                <option value="landing page">landing page</option>
-                <option value="dashboard/admin">dashboard/admin</option>
-                <option value="full-stack">full-stack</option>
+                <option value="" disabled>
+                  Select category
+                </option>
+                <option value="landing-page">
+                  Landing Page
+                </option>
+                <option value="dashboard">Dashboard</option>
+                <option value="admin">Admin</option>
+                <option value="full-stack">Full-Stack</option>
               </select>
             </div>
 
-            <label className="flex items-center gap-2 mt-5 cursor-pointer select-none">
-              <input
+            {/* Featured */}
+            <div className="flex items-center gap-3">
+              <Input
+                id="featured"
                 type="checkbox"
-                name="isFeatured"
-                className="w-4 h-4 accent-primary cursor-pointer"
+                name="featured"
+                checked={formData.featured}
+                onChange={handleChange}
+                className="w-4 h-4 p-0 rounded-sm accent-primary cursor-pointer"
               />
-              <span className="text-[13px] text-ink">Featured project</span>
-            </label>
-            <p className="text-[11px] text-slate mt-1 pl-6">
-              Shows in the homepage featured section
-            </p>
 
-            <div className="flex flex-col gap-2 mt-6 pt-5 border-t border-line">
-              <button
-                type="submit"
-                className="w-full text-[14px] font-medium px-4 py-2.5 rounded-sm bg-ink text-background hover:bg-primary transition-colors cursor-pointer"
+              <Label
+                htmlFor="featured"
+                className="mb-0 cursor-pointer"
               >
+                Featured project
+              </Label>
+            </div>
+
+            {/* Actions */}
+            <div className="pt-4 border-t border-line space-y-3">
+              <button type="submit" className="w-full">
                 Create Project
               </button>
+
               <Link
                 href="/admin/projects"
-                className="w-full text-center text-[14px] px-4 py-2.5 rounded-sm border border-line text-slate hover:border-ink hover:text-ink transition-colors"
+                className="block text-center font-mono text-[12px] text-slate hover:text-ink transition-colors"
               >
                 Cancel
               </Link>
