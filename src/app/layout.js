@@ -29,6 +29,7 @@ const RootLayout = ({ children }) => {
   return (
     <html
       lang="en"
+       data-scroll-behavior="smooth"
       className={`${fraunces.variable} ${plexSans.variable} ${plexMono.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col font-sans">
