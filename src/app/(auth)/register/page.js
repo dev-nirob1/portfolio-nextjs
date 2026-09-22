@@ -9,6 +9,8 @@ import Label from "@/app/components/ui/Label";
 import Input from "@/app/components/ui/Input";
 import Button from "@/app/components/ui/Button";
 import Paragraph from "@/app/components/ui/Paragraph";
+import { toast } from "react-toastify";
+import axios from "axios";
 
 const RegisterPage = () => {
   const router = useRouter();
@@ -36,28 +38,19 @@ const RegisterPage = () => {
     setError("");
 
     try {
-      const res = await fetch("/api/auth/register", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(formData),
-      });
-
-      const data = await res.json();
-
-      if (!res.ok) {
-        setError(data.error || "Registration failed");
-        setStatus("idle");
-        return;
-      }
-
+      const res = await axios.post("/api/auth/register", formData);
+      console.log(res)
+      toast.success("Account created successfully!");
       router.push("/login");
-    } catch {
-      setError("Something went wrong");
+    }
+    catch (error) {
+      toast.error(
+        error.response?.data?.error || "Registration failed"
+      );
+
       setStatus("idle");
     }
-  };
+  }
 
   return (
     <div className="w-full max-w-md">

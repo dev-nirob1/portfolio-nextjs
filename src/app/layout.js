@@ -1,5 +1,6 @@
 import { Fraunces, IBM_Plex_Sans, IBM_Plex_Mono } from "next/font/google";
 import "./globals.css";
+import { ToastContainer } from "react-toastify";
 
 const fraunces = Fraunces({
   variable: "--font-fraunces",
@@ -32,6 +33,7 @@ const RootLayout = ({ children }) => {
     >
       <body className="min-h-full flex flex-col font-sans">
         {children}
+        <ToastContainer />
       </body>
     </html>
   );
