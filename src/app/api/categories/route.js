@@ -5,7 +5,7 @@ import { ObjectId } from "mongodb";
 export async function GET() {
     const client = await clientPromise;
     const db = client.db("portfolio");
-    const categories = await db.collections('categories').find().toArray();
+    const categories = await db.collection('categories').find().toArray();
     return Response.json(categories);
 }
 
@@ -20,7 +20,7 @@ export async function POST(request) {
     const db = client.db("portfolio");
     const { name } = await request.json();
 
-    const result = await db.collections('categories').insertOne({ name });
+    const result = await db.collection('categories').insertOne({ name });
     return Response.json({ message: 'Category added', result })
 
 }
