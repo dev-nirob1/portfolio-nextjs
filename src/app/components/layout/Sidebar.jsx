@@ -2,17 +2,13 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import {
-  FiX,
-  FiHome,
-  FiFolder,
-  FiPlusCircle,
-  FiTag,
-  FiLogOut,
-} from "react-icons/fi";
+import {FiX,FiHome,FiFolder,FiPlusCircle,FiTag,FiLogOut,} from "react-icons/fi";
 
 import Button from "../ui/Button";
 import { usePathname } from "next/navigation";
+import { useAuth } from "@/app/context/AuthContext";
+import Span from "../ui/Span";
+import Paragraph from "../ui/Paragraph";
 
 const navItems = [
   { label: "Overview", href: "/admin", icon: FiHome },
@@ -23,6 +19,12 @@ const navItems = [
 
 const Sidebar = ({ isOpen, onClose }) => {
   const pathname = usePathname();
+  const { user, logout } = useAuth();
+
+  const handleLogout = async () => {
+    await logout();
+  };
+
   return (
     <>
       {isOpen && (
@@ -33,7 +35,7 @@ const Sidebar = ({ isOpen, onClose }) => {
       )}
 
       <aside
-        className={`fixed top-0 left-0 h-full w-64 bg-white border-r border-line z-40 flex flex-col transition-transform duration-300 md:translate-x-0 ${
+        className={`fixed overflow-y-scroll top-0 left-0 h-full w-64 bg-white border-r border-line z-40 flex flex-col transition-transform duration-300 md:translate-x-0 ${
           isOpen ? "translate-x-0" : "-translate-x-full"
         }`}
       >
@@ -87,9 +89,19 @@ const Sidebar = ({ isOpen, onClose }) => {
 
         {/* User + Logout */}
         <div className="p-3 border-t border-line">
+          {user && (
+            <div className="mb-3 px-2">
+              <Paragraph className="text-ink">{user?.name}</Paragraph>
+              <Span className="text-slate">
+                {user?.email}
+              </Span>
+            </div>
+          )}
+
           <Button
             type="button"
             variant="danger"
+            onClick={handleLogout}
             className="w-full flex items-center justify-center gap-3"
           >
             <FiLogOut size={16} />
@@ -102,3 +114,4 @@ const Sidebar = ({ isOpen, onClose }) => {
 };
 
 export default Sidebar;
+

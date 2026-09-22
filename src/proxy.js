@@ -8,6 +8,11 @@ export function proxy(request) {
       new URL("/login", request.url)
     );
   }
+  if(user?.role !=='admin'){
+    return NextResponse.redirect(
+      new URL('/', request.url)
+    );
+  }
   return NextResponse.next();
 }
 
