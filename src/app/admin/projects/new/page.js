@@ -11,8 +11,13 @@ import Textarea from "@/app/components/ui/Textarea";
 import Button from "@/app/components/ui/Button";
 import Span from "@/app/components/ui/Span";
 import Paragraph from "@/app/components/ui/Paragraph";
+import axios from "axios";
+import { useRouter } from "next/navigation";
 
 const NewProjectPage = () => {
+  const router = useRouter()
+
+
   const [formData, setFormData] = useState({
     title: "",
     slug: "",
@@ -41,12 +46,34 @@ const NewProjectPage = () => {
     }));
   };
 
-const handleSubmit = (e) => {
-  e.preventDefault();
+  const handleSubmit = async (e) => {
+    e.preventDefault();
 
-  console.log("submitted");
-  console.log(formData);
-}
+    try {
+      let imageUrl = "";
+
+      if (formData.image) {
+        const uploadForm = new FormData();
+        uploadForm.append("file", formData.image);
+
+        const uploadRes = await axios.post("/api/upload", uploadForm, {
+          headers: { "Content-Type": "multipart/form-data" },
+        });
+
+        imageUrl = uploadRes.data.url;
+      }
+
+      await axios.post("/api/projects", {
+        ...formData,
+        tags: formData.tags.split(",").map((tag) => tag.trim()).filter(Boolean),
+        image: imageUrl,
+      });
+
+      router.push("/admin/projects");
+    } catch (err) {
+      console.error(err);
+    }
+  };
 
   return (
     <div>
@@ -214,7 +241,6 @@ const handleSubmit = (e) => {
               >
                 <option value="draft">Draft</option>
                 <option value="published">Published</option>
-                <option value="archived">Archived</option>
               </select>
             </div>
 
@@ -235,8 +261,7 @@ const handleSubmit = (e) => {
                 <option value="landing-page">
                   Landing Page
                 </option>
-                <option value="dashboard">Dashboard</option>
-                <option value="admin">Admin</option>
+                <option value="front-end">Frontend</option>
                 <option value="full-stack">Full-Stack</option>
               </select>
             </div>
@@ -262,9 +287,9 @@ const handleSubmit = (e) => {
 
             {/* Actions */}
             <div className="pt-4 border-t border-line space-y-3">
-              <button type="submit" className="w-full">
+              <Button variant="primary" type="submit" className="w-full">
                 Create Project
-              </button>
+              </Button>
 
               <Link
                 href="/admin/projects"
