@@ -24,8 +24,9 @@ const NewProjectPage = () => {
     tags: "",
     shortDescription: "",
     overview: "",
-    problem: "",
     approach: "",
+    liveUrl: "",
+    githubUrl: "",
     status: "draft",
     category: "",
     featured: false,
@@ -196,20 +197,6 @@ const NewProjectPage = () => {
             />
           </div>
 
-          {/* Problem */}
-          <div>
-            <Label htmlFor="problem">problem</Label>
-
-            <Textarea
-              id="problem"
-              name="problem"
-              rows={5}
-              value={formData.problem}
-              onChange={handleChange}
-              placeholder="What problem does this project solve?"
-            />
-          </div>
-
           {/* Approach */}
           <div>
             <Label htmlFor="approach">approach</Label>
@@ -223,7 +210,33 @@ const NewProjectPage = () => {
               placeholder="How did you approach the solution?"
             />
           </div>
+          {/* Live URL */}
+          <div>
+            <Label htmlFor="liveUrl">live url</Label>
+            <Input
+              id="liveUrl"
+              type="url"
+              name="liveUrl"
+              value={formData.liveUrl}
+              onChange={handleChange}
+              placeholder="https://example.com"
+            />
+          </div>
+
+          {/* GitHub URL */}
+          <div>
+            <Label htmlFor="githubUrl">github url</Label>
+            <Input
+              id="githubUrl"
+              type="url"
+              name="githubUrl"
+              value={formData.githubUrl}
+              onChange={handleChange}
+              placeholder="https://github.com/username/project"
+            />
+          </div>
         </div>
+
 
         {/* Sidebar */}
         <div className="lg:col-span-1">
