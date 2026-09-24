@@ -4,18 +4,25 @@ import Heading from "../ui/Heading";
 import Paragraph from "../ui/Paragraph";
 import Badge from "../ui/Badge";
 import Span from "../ui/Span";
+import Image from "next/image";
 
 const WorkListCard = ({ project }) => {
   return (
     <Link
       href={`/work/${project.slug}`}
-      className="group flex flex-col md:flex-row gap-5 md:items-center py-6 border-b border-line hover:pl-2 transition-all"
+      className="group flex flex-col md:flex-row gap-5 md:items-center py-6 border-b border-line hover:pl-2 transition-all duration-500"
     >
       {/* Preview */}
-      <div className="w-full md:w-40 aspect-video shrink-0 border border-line bg-surface flex items-center justify-center">
-        <p className="font-mono text-[10px] text-slate text-center px-2">
-          drop {project.slug}.png
-        </p>
+      <div className="w-full md:w-50 h-34 shrink-0 border border-line overflow-hidden">
+        {project.image && (
+          <Image
+            src={project.image}
+            alt={project.title}
+            width={460}
+            height={300}
+            className="w-full h-full object-cover transition-transform duration-500 ease-out group-hover:scale-105"
+          />
+        )}
       </div>
 
       {/* Content */}
@@ -29,7 +36,7 @@ const WorkListCard = ({ project }) => {
           </Heading>
 
           <Paragraph className="text-[14px] mt-1 max-w-lg">
-            {project.description}
+            {project.shortDescription}
           </Paragraph>
 
           <div className="flex flex-wrap gap-2 mt-3">
@@ -39,9 +46,9 @@ const WorkListCard = ({ project }) => {
           </div>
         </div>
 
-          <Span className="capitalize text-slate group-hover:text-primary transition-colors">
-            case study →
-          </Span>
+        <Span className="capitalize text-slate group-hover:text-primary transition-colors">
+          case study →
+        </Span>
       </div>
     </Link>
   );

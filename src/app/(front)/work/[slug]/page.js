@@ -1,71 +1,114 @@
 import Link from "next/link";
-import { notFound, } from "next/navigation";
-import WindowPanel from "@/app/components/ui/WindowPanel";
-import { projects } from "@/data/projects";
+import Image from "next/image";
 
-const ProjectDetailPage = async({params}) => {
-    const {slug} = await params;
-  const project = projects.find((p) => p.slug === slug);
+import Container from "@/app/components/ui/Container";
+import Heading from "@/app/components/ui/Heading";
+import Paragraph from "@/app/components/ui/Paragraph";
+import Badge from "@/app/components/ui/Badge";
+import axios from "axios";
 
-  if (!project) {
-    notFound();
-  }
+const ProjectDetailPage = async ({ params }) => {
+  const { slug } = await params;
+
+  const response = await axios.get(
+    `${process.env.NEXT_PUBLIC_BASE_URL}/api/projects/details/${slug}`
+  );
+
+  const project = response.data;
 
   return (
-    <div className="px-6 md:px-14 py-16 max-w-4xl mx-auto">
-      <Link href="/#work" className="font-mono text-[12px] text-slate hover:text-ink transition-colors">
-        ← back to work
-      </Link>
+    <main className="py-12">
+      <Container className="max-w-3xl!">
+        {/* Back */}
+        <Link
+          href="/"
+          className="font-mono text-[12px] text-slate hover:text-ink transition-colors"
+        >
+          ← Back to Home
+        </Link>
 
-      <h1 className="font-display text-[2.2rem] md:text-[2.8rem] leading-tight mt-6 text-ink">
-        {project.title}
-      </h1>
+        {/* Header */}
+        <div className="mt-6">
+          <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-5">
+            <div>
+              <Heading as="h3">{project.title}</Heading>
 
-      <div className="flex gap-2 mt-4">
-        {project.tags.map((tag) => (
-          <span
-            key={tag}
-            className="font-mono text-[11px] text-primary bg-line/40 px-2 py-1 rounded-sm"
-          >
-            {tag}
-          </span>
-        ))}
-      </div>
+              <Paragraph className="mt-2">
+                {project.shortDescription}
+              </Paragraph>
 
-      <div className="aspect-video border border-line bg-surface flex items-center justify-center my-10">
-        <p className="font-mono text-[11px] text-slate">drop {project.slug}-hero.png here</p>
-      </div>
+              <div className="flex flex-wrap gap-2 mt-3">
+                {project.tags?.map((tag) => (
+                  <Badge key={tag}>{tag}</Badge>
+                ))}
+              </div>
+            </div>
 
-      <div className="space-y-10">
-        <div>
-          <p className="font-mono text-[12px] text-slate italic mb-3">// overview</p>
-          <p className="text-[15px] leading-relaxed text-ink max-w-2xl">{project.overview}</p>
-        </div>
+            {/* Project Links */}
+            <div className="flex gap-3 shrink-0">
+              <Link
+                href="#"
+                className="px-5 py-2.5 rounded-sm border border-line text-[13px] font-medium text-ink hover:border-ink transition-colors"
+              >
+                GitHub ↗
+              </Link>
 
-        <div>
-          <p className="font-mono text-[12px] text-slate italic mb-3">// problem</p>
-          <p className="text-[15px] leading-relaxed text-ink max-w-2xl">{project.problem}</p>
-        </div>
-
-        <div>
-          <p className="font-mono text-[12px] text-slate italic mb-3">// approach</p>
-          <p className="text-[15px] leading-relaxed text-ink max-w-2xl">{project.approach}</p>
-        </div>
-
-        <WindowPanel label="stack.js">
-          <div className="p-6 font-mono text-[13px]">
-            <span className="text-primary">const</span> tools = [
-            {project.tags.map((tag, i) => (
-              <span key={tag}>
-                <span className="text-secondary">"{tag}"</span>
-                {i < project.tags.length - 1 && ", "}
-              </span>
-            ))}
-            ]
+              <Link
+                href="#"
+                className="px-5 py-2.5 rounded-sm bg-ink text-background text-[13px] font-medium hover:bg-primary transition-colors"
+              >
+                Live site ↗
+              </Link>
+            </div>
           </div>
-        </WindowPanel>
-      </div>
-    </div>
+        </div>
+
+        {/* Image */}
+        {project.image && (
+          <div className="relative w-full aspect-video border border-line mt-6 overflow-hidden">
+            <Image
+              src={project.image}
+              alt={project.title}
+              fill
+              className="object-cover"
+            />
+          </div>
+        )}
+
+        {/* Overview */}
+        {project.overview && (
+          <section className="mt-8">
+            <Heading as="h5">Overview</Heading>
+
+            <Paragraph className="mt-2">
+              {project.overview}
+            </Paragraph>
+          </section>
+        )}
+
+        {/* Problem */}
+        {project.problem && (
+          <section className="mt-6">
+            <Heading as="h5">Problem</Heading>
+
+            <Paragraph className="mt-2">
+              {project.problem}
+            </Paragraph>
+          </section>
+        )}
+
+        {/* Approach */}
+        {project.approach && (
+          <section className="mt-6">
+            <Heading as="h5">Approach</Heading>
+
+            <Paragraph className="mt-2">
+              {project.approach}
+            </Paragraph>
+          </section>
+        )}
+      </Container>
+    </main>
   );
 };
 
