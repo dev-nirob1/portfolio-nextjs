@@ -5,6 +5,7 @@ import Link from "next/link";
 import { FiMenu, FiX } from "react-icons/fi";
 import Container from "../ui/Container";
 import Image from "next/image";
+import Button from "../ui/Button";
 
 const navLinks = [
   { label: "Home", href: "/" },
@@ -17,24 +18,34 @@ const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <header className="sticky top-0 z-20 border-b border-line bg-background/90 backdrop-blur-sm">
+    <header className="sticky top-0 z-20 border-b border-line/30 bg-white/90 backdrop-blur-sm">
       <Container className="flex items-center justify-between">
-        <Link href="#home" className="font-display text-lg tracking-tight text-ink">
-          <Image src="/logo-light.png" alt="Logo" width={240} height={70} className="inline-block object-cover border" />
+        <Link
+          href="#home"
+          className="font-display text-lg tracking-tight text-ink"
+        >
+          <Image
+            src="/logo-light.png"
+            alt="Logo"
+            width={240}
+            height={70}
+            className="inline-block object-cover border"
+          />
         </Link>
 
         <nav className="hidden md:flex items-center gap-8 font-mono text-[13px] text-slate">
           {navLinks.map((link) => (
-            <Link key={link.href} href={link.href} className="hover:text-ink transition-colors">
+            <Link
+              key={link.href}
+              href={link.href}
+              className="hover:text-primary font-medium transition-colors"
+            >
               {link.label}
             </Link>
           ))}
-          <Link
-            href="/resume.pdf"
-            target="_blank"
-            className="px-4 py-2 rounded-sm bg-ink text-background font-medium hover:bg-primary transition-colors"
-          >
-            Resume
+
+          <Link href="/resume.pdf" target="_blank">
+            <Button>Resume</Button>
           </Link>
         </nav>
 
