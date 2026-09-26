@@ -167,7 +167,7 @@ const ProjectsPage = () => {
                   <td className="px-4 py-3.5">
                     <div className="flex items-center justify-end gap-2">
                       <Link
-                        href={`/admin/projects/${project._id}/edit`}
+                        href={`/admin/projects/edit/${project._id}`}
                         className="p-2 rounded-sm border border-line text-slate hover:border-ink hover:text-ink transition-colors"
                       >
                         <FiEdit2 size={14} />

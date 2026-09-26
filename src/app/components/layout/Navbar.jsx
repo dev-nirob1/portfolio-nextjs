@@ -21,7 +21,7 @@ const Navbar = () => {
     <header className="sticky top-0 z-20 border-b border-line/30 bg-white/90 backdrop-blur-sm">
       <Container className="flex items-center justify-between">
         <Link
-          href="#home"
+          href="/"
           className="font-display text-lg tracking-tight text-ink"
         >
           <Image
@@ -45,7 +45,7 @@ const Navbar = () => {
           ))}
 
           <Link href="/resume.pdf" target="_blank">
-            <Button>Resume</Button>
+            <Button className="py-2">Resume</Button>
           </Link>
         </nav>
 
@@ -70,13 +70,8 @@ const Navbar = () => {
               {link.label}
             </Link>
           ))}
-          <Link
-            href="/resume.pdf"
-            target="_blank"
-            onClick={() => setIsOpen(false)}
-            className="px-4 py-2 rounded-sm bg-ink text-background font-medium text-center w-fit"
-          >
-            Resume
+          <Link href="/resume.pdf" target="_blank">
+            <Button className="py-2">Resume</Button>
           </Link>
         </nav>
       )}

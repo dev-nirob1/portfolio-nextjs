@@ -11,7 +11,7 @@ import ContactForm from "../Widgets/ContactForm";
 const contactLinks = [
   {
     label: "Email",
-    value: "hello@nirob.dev",
+    value: "me.nirob01@gmail.com",
     href: "mailto:me.nirob01@gmail.com",
   },
   {
@@ -21,7 +21,7 @@ const contactLinks = [
   },
   {
     label: "LinkedIn",
-    value: "linkedin.com/in/al-hasan-nirob10925",
+    value: "LinkedIn",
     href: "https://www.linkedin.com/in/al-hasan-nirob10925/",
   },
 ];
